@@ -1,4 +1,4 @@
-
+import '../styles/_Login.scss'
 
 const App = () => {
     return (
