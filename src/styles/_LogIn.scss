@@ -1,3 +1,129 @@
-body {
-    background-color: rebeccapurple;
+.home__container {
+    min-height: 100vh;
+    display: flex;
+    color: $color-primary;
+
+    @include respond(tab-land) {
+        display: block;
+    }
+
+    &>* {
+        flex: 1;
+        padding: 5rem;
+
+        @include respond(tab-port) {
+            padding: 5rem 3rem;
+        }
+
+        @include respond(phone) {
+            padding: 5rem 1.5rem;
+        }
+    }
+
+    &-left {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-right {
+        box-shadow: 0px 15px 90px rgba(0, 0, 0, 0.03);
+
+        @include respond(tab-port) {
+            padding-top: 1rem;
+        }
+    }
+}
+
+.home__hero-container {
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.home__logo {
+    margin-bottom: 8rem;
+
+    img {}
+}
+
+.home__content-details {
+    margin-top: 7rem;
+
+    @include respond(tab-land) {
+        margin-top: 1rem;
+    }
+
+    h1 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+    }
+
+    p {
+        margin-bottom: 4rem;
+        font-size: 1.25rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 85%;
+
+        @include respond(tab-port) {
+            max-width: 100%;
+        }
+    }
+}
+
+.input__group {
+    position: relative;
+    margin-bottom: 1.7rem;
+
+    input {
+        padding: 1rem;
+        width: 100%;
+        border-radius: .3rem;
+        border: 2px solid rgba(84, 95, 125, 0.15);
+    }
+}
+
+.button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .75rem;
+
+
+    &__show {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 1rem;
+        color: $color-primary-teal;
+        text-decoration: none;
+    }
+
+    &__password {
+        width: fit-content;
+        text-align: left;
+        color: $color-primary-teal;
+        margin-bottom: 2rem;
+    }
+
+    &__logIn {
+        background-color: $color-primary-teal;
+        padding: 1rem;
+        color: #fff;
+        border-radius: .3rem;
+        font-size: .875rem;
+    }
+}
+
+
+::placeholder {
+    color: #545F7D;
 }
