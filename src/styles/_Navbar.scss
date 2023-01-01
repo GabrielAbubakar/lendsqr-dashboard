@@ -6,17 +6,30 @@
     box-shadow: 3px 0 20px rgba(0, 0, 0, 0.04);
     color: #213F7D;
 
+    @include respond(tab-land) {
+        gap: 1rem;
+    }
+
+    @include respond(tab-port) {
+        gap: 2rem;
+    }
+
     &__logo-box {}
 
     &__input-group {
         // border-radius: .5rem;
         // overflow: hidden;
+        display: flex;
 
         input {
             padding: .6rem 1rem;
             width: 50ch;
             border: 1px solid rgba(33, 63, 125, .2);
             border-radius: .5rem 0 0 .5rem;
+
+            @include respond(tab-port) {
+                width: auto;
+            }
         }
 
         button {
@@ -36,6 +49,14 @@
         align-items: center;
         gap: 1.5rem;
         list-style-type: none;
+
+        @include respond(tab-land) {
+            gap: .8rem;
+        }
+
+        @include respond(tab-port) {
+            display: none;
+        }
 
         li {
             cursor: pointer;
@@ -58,5 +79,16 @@
                 font-weight: 500;
             }
         }
+    }
+
+}
+
+.profile__mobile {
+    display: none;
+
+    @include respond(tab-port) {
+        display: flex;
+        align-items: center;
+
     }
 }

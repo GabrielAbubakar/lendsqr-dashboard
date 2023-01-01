@@ -36,6 +36,13 @@ const Navbar = () => {
                     </p>
                 </li>
             </ul>
+
+            <div className="profile__mobile">
+                <div>
+                    <img src={Profile} alt="profile image" />
+                </div>
+                <img src={DropdownIcon} alt="dropdown icon" />
+            </div>
         </nav>
     )
 }
