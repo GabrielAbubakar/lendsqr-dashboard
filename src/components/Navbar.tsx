@@ -3,6 +3,8 @@ import Profile from '../assets/profile-image.png'
 import SearchIcon from '../assets/icons/search-icon.svg'
 import NotificationIcon from '../assets/icons/notification-icon.svg'
 import DropdownIcon from '../assets/icons/dropdown-icon.svg'
+import '../styles/_Navbar.scss';
+
 
 const Navbar = () => {
     return (

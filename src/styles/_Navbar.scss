@@ -1,3 +1,6 @@
+@import './mixin';
+@import './variables';
+
 .navigation {
     display: flex;
     justify-content: space-between;
