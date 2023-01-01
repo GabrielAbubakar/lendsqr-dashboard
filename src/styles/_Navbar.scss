@@ -20,6 +20,11 @@
         // border-radius: .5rem;
         // overflow: hidden;
         display: flex;
+        margin: 0 auto 0 15rem;
+
+        @include respond(tab-land) {
+            margin: 0;
+        }
 
         input {
             padding: .6rem 1rem;
