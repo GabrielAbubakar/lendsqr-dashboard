@@ -3,11 +3,24 @@ import '../styles/global.scss';
 // import '../styles/Login.scss';
 import Logo from '../assets/lensqr-logo.svg';
 import Hero from '../assets/pablo-sign-in1.png'
+import { useNavigate } from 'react-router-dom';
 
 const LogIn = () => {
 
+
+    const navigate = useNavigate();
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     const [passwordShown, setPasswordShown] = useState<boolean>(false)
 
+    const handleLogIn = (e: any) => {
+        e.preventDefault()
+
+        if (/\S+@\S+\.\S+/.test(email) && password !== '') {
+            console.log('valid')
+            navigate('/dashboard')
+        }
+    }
 
     return (
         <div className='home__container'>
@@ -27,10 +40,24 @@ const LogIn = () => {
                     <p>Enter details to login.</p>
                     <form>
                         <span className="input__group">
-                            <input type="email" placeholder='Email' name='email' id='email-input' required />
+                            <input
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                type="email"
+                                placeholder='Email'
+                                name='email'
+                                id='email-input'
+                                required />
                         </span>
                         <span className='input__group'>
-                            <input type={passwordShown ? "text" : "password"} placeholder='Password' name="password" id="password-input" required />
+                            <input
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                type={passwordShown ? "text" : "password"}
+                                placeholder='Password'
+                                name="password"
+                                id="password-input"
+                                required />
                             <span
                                 className='button button__show'
                                 onClick={() => setPasswordShown(!passwordShown)}>
@@ -39,7 +66,7 @@ const LogIn = () => {
                         </span>
 
                         <button className='button button__password'>Forgot Password?</button>
-                        <button className='button button__logIn'>Log In</button>
+                        <button className='button button__logIn' onClick={handleLogIn}>Log In</button>
                     </form>
                 </div>
             </div>
