@@ -1,0 +1,102 @@
+@import './mixin';
+@import './variables';
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.8rem;
+    box-shadow: 3px 0 20px rgba(0, 0, 0, 0.04);
+    color: #213F7D;
+
+    @include respond(tab-land) {
+        gap: 1rem;
+    }
+
+    @include respond(tab-port) {
+        gap: 2rem;
+    }
+
+    &__logo-box {}
+
+    &__input-group {
+        // border-radius: .5rem;
+        // overflow: hidden;
+        display: flex;
+        margin: 0 auto 0 15rem;
+
+        @include respond(tab-land) {
+            margin: 0;
+        }
+
+        input {
+            padding: .6rem 1rem;
+            width: 50ch;
+            border: 1px solid rgba(33, 63, 125, .2);
+            border-radius: .5rem 0 0 .5rem;
+
+            @include respond(tab-port) {
+                width: auto;
+            }
+        }
+
+        button {
+            background-color: $color-primary-teal;
+            padding: .6rem 1rem;
+            border: 0;
+            border-radius: 0 .5rem .5rem 0;
+        }
+
+        ::placeholder {
+            color: rgba(84, 95, 125, .7);
+        }
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        list-style-type: none;
+
+        @include respond(tab-land) {
+            gap: .8rem;
+        }
+
+        @include respond(tab-port) {
+            display: none;
+        }
+
+        li {
+            cursor: pointer;
+        }
+
+
+        &-profileBox {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            div {
+                border-radius: 50%;
+                overflow: hidden;
+            }
+
+            p {
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+            }
+        }
+    }
+
+}
+
+.profile__mobile {
+    display: none;
+
+    @include respond(tab-port) {
+        display: flex;
+        align-items: center;
+
+    }
+}
