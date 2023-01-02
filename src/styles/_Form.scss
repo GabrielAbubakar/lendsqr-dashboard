@@ -1,0 +1,59 @@
+@import './mixin';
+@import './variables';
+
+
+.table__filter {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    background-color: #fff;
+    padding: 2.2rem 1.8rem;
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 5px;
+    border: 1px solid rgba(84, 95, 125, 0.14);
+    width: 30%;
+
+    label {
+        font-weight: 500;
+    }
+
+    input,
+    select {
+        display: block;
+        width: 100%;
+        padding: .6rem 1rem;
+        margin: .5rem 0 1.5rem 0;
+        border-radius: 4px;
+        border: 1px solid #878FA4;
+    }
+
+    &-btn {
+        display: flex;
+        gap: 1rem;
+
+
+        button {
+            flex: 1;
+            border-radius: 8px;
+            padding: .6rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+
+            &:first-of-type {
+                color: inherit;
+                border: 1px solid #545F7D;
+                background-color: #fff;
+            }
+
+            &:last-of-type {
+                background-color: $color-primary-teal;
+                border: none;
+                color: #fff;
+            }
+        }
+    }
+
+    ::placeholder {
+        color: #878FA4;
+    }
+}

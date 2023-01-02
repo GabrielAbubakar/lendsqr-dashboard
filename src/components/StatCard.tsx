@@ -3,7 +3,7 @@ import '../styles/_StatCard.scss';
 interface Stats {
     img: any,
     title: string,
-    stat: string
+    stat: number | undefined
 }
 
 const StatCard = ({ img, title, stat }: Stats) => {
