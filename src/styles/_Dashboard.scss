@@ -12,7 +12,81 @@
         background-color: #fbfbfb;
         flex: 4;
         padding: 3rem;
+        color: #545F7D;
 
-        h1 {}
+        h1 {
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: #213F7D;
+            margin-bottom: 3rem;
+        }
+    }
+
+    .card__container {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    &__table {
+        position: relative;
+
+        table {
+            background-color: #fff;
+            box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem;
+            border-radius: 5px;
+        }
+
+
+
+        thead {
+            text-align: left;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: .75rem;
+
+            // tr {}
+
+            th {
+
+                button {
+                    cursor: pointer;
+                    background-color: transparent;
+                    border: 0;
+                }
+            }
+        }
+
+        tbody {
+            font-size: 0.875rem;
+
+            // tr {}
+
+            td {
+                padding: 1rem 1.5rem 1rem 0;
+                border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+            }
+        }
+    }
+}
+
+.table__footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+
+    ul {
+        display: flex;
+        gap: 1rem;
+        list-style-type: none;
+
+        // li {}
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 1.4rem;
     }
 }
