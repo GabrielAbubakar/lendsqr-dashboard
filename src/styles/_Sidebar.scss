@@ -6,9 +6,9 @@
     flex: 1;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
     padding: 1.8rem 0;
-
-    position: sticky;
-    top: 10px;
+    align-self: flex-start;
+    max-height: 90vh;
+    overflow-y: scroll;
 
 
     h2 {
