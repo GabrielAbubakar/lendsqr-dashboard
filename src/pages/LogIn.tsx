@@ -38,7 +38,7 @@ const LogIn = () => {
                 <div className='home__content-details'>
                     <h1>Welcome!</h1>
                     <p>Enter details to login.</p>
-                    <form>
+                    <form onSubmit={handleLogIn}>
                         <span className="input__group">
                             <input
                                 value={email}
