@@ -50,7 +50,7 @@ const Dashboard = () => {
         <div className="dashboard">
             <Navbar />
             <div className="dashboard__container">
-                <Sidebar />
+                <Sidebar isProfile={false} />
                 <div className="content">
                     <h1>Users</h1>
 
