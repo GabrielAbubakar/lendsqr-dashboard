@@ -193,15 +193,19 @@ const Sidebar = ({ isProfile }: SidebarProps) => {
                 }
             </ul>
 
-            <div>
-                <Link to='/'>
-                    <img src={SignOutIcon} alt="sign out logo" />
-                    <p>
-                        Logout
-                    </p>
-                </Link>
-                <p>v1.2.0</p>
-            </div>
+            {
+                isProfile && (
+                    <div>
+                        <Link to='/'>
+                            <img src={SignOutIcon} alt="sign out logo" />
+                            <p>
+                                Logout
+                            </p>
+                        </Link>
+                        <p>v1.2.0</p>
+                    </div>
+                )
+            }
 
 
         </div>
