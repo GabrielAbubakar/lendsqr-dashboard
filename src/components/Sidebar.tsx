@@ -29,7 +29,7 @@ import SignOutIcon from '../assets/icons/sign-out-icon.svg';
 
 
 interface SidebarProps {
-    isProfile: boolean
+    isProfile?: boolean
 }
 
 const Sidebar = ({ isProfile }: SidebarProps) => {
