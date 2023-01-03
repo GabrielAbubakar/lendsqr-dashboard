@@ -8,9 +8,12 @@
     padding: 1.8rem 0;
     height: 100vh;
     overflow-y: scroll;
-
     position: sticky;
     top: 10px;
+
+    @include respond(tab-port) {
+        display: none;
+    }
 
 
     h2 {
@@ -77,6 +80,22 @@
             width: 3px;
             height: 100%;
             background-color: $color-primary-teal;
+        }
+    }
+
+    div:last-of-type {
+        padding-inline: 1.8rem;
+
+        p {
+            color: #213F7D;
+        }
+
+        a {
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+            text-decoration: none;
+            margin-bottom: 2rem;
         }
     }
 }

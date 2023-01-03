@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Logo from '../assets/lendsqr-nav-logo.svg'
 import Profile from '../assets/profile-image.png'
 import SearchIcon from '../assets/icons/search-icon.svg'
@@ -11,7 +12,9 @@ const Navbar = () => {
         <nav className='navigation'>
 
             <div className='navigation__logo-box'>
-                <img src={Logo} alt="lendsqr logo" title='lendsqr logo' />
+                <Link to='/'>
+                    <img src={Logo} alt="lendsqr logo" title='lendsqr logo' />
+                </Link>
             </div>
 
             <div className='navigation__input-group'>

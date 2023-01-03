@@ -32,7 +32,7 @@ const UserDetails = () => {
         <div className='user__details'>
             <Navbar />
             <div className="user__details-container">
-                <Sidebar />
+                <Sidebar isProfile={true} />
                 <div className='user__details-content'>
 
                     <span className="back-btn">
@@ -66,7 +66,7 @@ const UserDetails = () => {
 
                                     </div> */}
                                     <div className="profile__balance">
-                                        <h2>{data.accountBalance}</h2>
+                                        <h2>N{data.accountBalance}</h2>
                                         <p>{data.profile.bvn}</p>
                                     </div>
                                 </div>

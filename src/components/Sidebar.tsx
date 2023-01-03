@@ -1,9 +1,9 @@
+import { Link } from 'react-router-dom'
 import '../styles/_Sidebar.scss';
 
 import CaseBoldIcon from '../assets/icons/briefcase-bold-icon.svg';
 import ArrowIcon from '../assets/icons/arrow-down-icon.svg';
 import HomeIcon from '../assets/icons/home-icon.svg';
-
 
 import UsersIcon from '../assets/icons/user-friends-icon.svg';
 import UserIcon from '../assets/icons/users2-icon.svg';
@@ -24,10 +24,15 @@ import ChartIcon from '../assets/icons/chart-bar-icon.svg';
 import SliderIcon from '../assets/icons/sliders-h-icon.svg';
 import PerIcon from '../assets/icons/badge-percent-icon.svg';
 import ClipIcon from '../assets/icons/clipboard-list-icon.svg';
+import TireIcon from '../assets/icons/tire-icon.svg';
+import SignOutIcon from '../assets/icons/sign-out-icon.svg';
 
 
+interface SidebarProps {
+    isProfile: boolean
+}
 
-const Sidebar = () => {
+const Sidebar = ({ isProfile }: SidebarProps) => {
     return (
         <div className="sidebar">
             <h2>
@@ -160,23 +165,45 @@ const Sidebar = () => {
             <ul>
                 <li>
                     <span>
-                        <img src={SliderIcon} alt="user logo" />
+                        <img src={SliderIcon} alt="slider logo" />
                     </span>
                     Preferences
                 </li>
                 <li>
                     <span>
-                        <img src={PerIcon} alt="user logo" />
+                        <img src={PerIcon} alt="percent logo" />
                     </span>
                     Fees and Pricing
                 </li>
                 <li>
                     <span>
-                        <img src={ClipIcon} alt="user logo" />
+                        <img src={ClipIcon} alt="clip logo" />
                     </span>
                     Audit Logs
                 </li>
+                {
+                    isProfile && (
+                        <li>
+                            <span>
+                                <img src={TireIcon} alt="tire logo" />
+                            </span>
+                            System Messages
+                        </li>
+                    )
+                }
             </ul>
+
+            <div>
+                <Link to='/'>
+                    <img src={SignOutIcon} alt="sign out logo" />
+                    <p>
+                        Logout
+                    </p>
+                </Link>
+                <p>v1.2.0</p>
+            </div>
+
+
         </div>
     )
 }
