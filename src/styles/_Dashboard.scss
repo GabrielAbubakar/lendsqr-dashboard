@@ -6,6 +6,10 @@
     &__container {
         flex: 1;
         display: flex;
+
+        @include respond(tab-port) {
+            display: block;
+        }
     }
 
     .content {
