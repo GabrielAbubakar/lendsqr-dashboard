@@ -80,6 +80,44 @@
                     text-transform: capitalize;
                 }
 
+                &:last-of-type {
+                    text-align: right;
+                    padding: 0;
+                    width: 10px;
+                    position: relative;
+
+                    button {
+                        background-color: transparent;
+                        border: none;
+                        cursor: pointer;
+                    }
+
+                    ul {
+                        position: absolute;
+                        top: 35px;
+                        right: 0;
+                        padding: 1rem;
+                        list-style-type: none;
+                        background-color: #fff;
+                        box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+                        display: flex;
+                        flex-direction: column;
+                        gap: .8rem;
+                        z-index: 10;
+
+                        li {
+                            display: flex;
+                            align-items: center;
+                            gap: .5rem;
+
+                            a {
+                                color: inherit;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+
                 // @include respond(tab-port) {
                 //     padding: .8rem .8rem .8rem 0;
                 // }

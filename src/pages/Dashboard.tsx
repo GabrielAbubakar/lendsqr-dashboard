@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import StatCard from "../components/StatCard";
@@ -7,14 +8,29 @@ import UsersIcon from '../assets/icons/users-icon.svg';
 import ActiveIcon from '../assets/icons/active-users-icon.svg';
 import LoansIcon from '../assets/icons/loans-icon.svg';
 import SavingsIcon from '../assets/icons/savings-icon.svg';
+
+import Ic from '../assets/icons/ic-more-icon.svg';
+import Blacklist from '../assets/icons/blacklist-icon.svg';
+import Activate from '../assets/icons/activate-icon.svg';
+import ViewIcon from '../assets/icons/view-more-icon.svg';
+
 import NextIcon from '../assets/icons/next-btn-icon.svg';
 import PrevIcon from '../assets/icons/prev-btn-icon.svg';
 import FilterIcon from '../assets/icons/filter-results-icon.svg';
+import { User } from "../components/types";
 
 const Dashboard = () => {
 
     const [filterOpen, setFilterOpen] = useState<boolean>(false)
-    const [data, setData] = useState<[]>()
+    const [data, setData] = useState<User[]>()
+    const [filteredData, setFilteredData] = useState<User[]>()
+    const [paginatedData, setPaginatedData] = useState<User[]>()
+    const [page, setPage] = useState<number>(1)
+    const [rows, setRows] = useState<number>(10)
+    const [pages, setPages] = useState<number>()
+    const [pagesArr, setPagesArr] = useState()
+
+    const columns = ['Organization', 'Username', 'Email', 'Phone Number', 'Date Joined', 'Status']
 
     const [form, setForm] = useState({
         org: '',
@@ -25,10 +41,13 @@ const Dashboard = () => {
         status: ''
     })
 
-    const columns = ['Organization', 'Username', 'Email', 'Phone Number', 'Date Joined', 'Status']
 
-    const openFilter = () => {
-        setFilterOpen(!filterOpen)
+    const pagination = (data: User[], rows: number, page: number) => {
+        const start = (page - 1) * rows;
+        const end = start + rows
+
+        setPaginatedData(data.slice(start, end))
+        setPages(Math.ceil(data.length / rows))
     }
 
     const fetchUsers = () => {
@@ -44,6 +63,12 @@ const Dashboard = () => {
     useEffect(() => {
         fetchUsers()
     }, [])
+
+    useEffect(() => {
+        if (data) {
+            pagination(data, rows, page)
+        }
+    }, [data, rows, page])
 
 
     return (
@@ -73,8 +98,8 @@ const Dashboard = () => {
                                         {
                                             columns.map((item, i) => (
                                                 <th key={i}>
-                                                    {item} <button onClick={openFilter}>
-                                                        <img src={FilterIcon} alt="" />
+                                                    {item} <button onClick={() => setFilterOpen(!filterOpen)}>
+                                                        <img src={FilterIcon} alt="filter icon" />
                                                     </button>
                                                 </th>
                                             ))
@@ -84,7 +109,7 @@ const Dashboard = () => {
 
                                 <tbody>
                                     {
-                                        data && data.map((item: any, i) => (
+                                        paginatedData && paginatedData.map((item: any, i) => (
                                             <tr key={i}>
                                                 <td>{item.orgName}</td>
                                                 <td>{item.userName}</td>
@@ -94,6 +119,27 @@ const Dashboard = () => {
                                                     {new Date(item?.createdAt).toLocaleDateString()} {new Date(item?.createdAt).toLocaleTimeString()}
                                                 </td>
                                                 <td>{item.id}</td>
+                                                <td>
+                                                    <button>
+                                                        <img src={Ic} alt="" />
+                                                    </button>
+                                                    <ul>
+                                                        <li>
+                                                            <img src={ViewIcon} alt="" />
+                                                            <Link to={`/user-details/${item.id}`}>
+                                                                View Details
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <img src={Blacklist} alt="" />
+                                                            Blacklist User
+                                                        </li>
+                                                        <li>
+                                                            <img src={Activate} alt="" />
+                                                            Activate User
+                                                        </li>
+                                                    </ul>
+                                                </td>
                                             </tr>
                                         ))
                                     }
@@ -103,15 +149,23 @@ const Dashboard = () => {
                             </table>
 
                             <div className="table__footer">
-                                <div>Showing 100 out of 100</div>
+                                <div>
+                                    <p>
+                                        Showing <select name="rows" id="rows" onChange={(e) => setRows(+e.target.value)}>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                        </select>  out of {data?.length}
+                                    </p>
+                                </div>
                                 <div className="pagination">
                                     <span>
                                         <img src={PrevIcon} alt="" />
                                     </span>
                                     <ul>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
+                                        {
+
+                                        }
                                     </ul>
                                     <span>
                                         <img src={NextIcon} alt="" />
