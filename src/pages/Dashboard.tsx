@@ -127,65 +127,67 @@ const Dashboard = () => {
                                 form={form}
                                 setForm={setForm} />
 
-                            <table cellSpacing={0}>
+                            <div className="dashboard__table-container">
+                                <table cellSpacing={0}>
 
-                                <thead>
-                                    <tr>
+                                    <thead>
+                                        <tr>
+                                            {
+                                                columns.map((item, i) => (
+                                                    <th key={i}>
+                                                        {item} <button onClick={() => setFilterOpen(!filterOpen)}>
+                                                            <img src={FilterIcon} alt="filter icon" />
+                                                        </button>
+                                                    </th>
+                                                ))
+                                            }
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
                                         {
-                                            columns.map((item, i) => (
-                                                <th key={i}>
-                                                    {item} <button onClick={() => setFilterOpen(!filterOpen)}>
-                                                        <img src={FilterIcon} alt="filter icon" />
-                                                    </button>
-                                                </th>
+                                            paginatedData && paginatedData.map((item: any, i) => (
+                                                <tr key={i}>
+                                                    <td>{item.orgName}</td>
+                                                    <td>{item.userName}</td>
+                                                    <td>{item.email}</td>
+                                                    <td>{item.profile.phoneNumber}</td>
+                                                    <td>
+                                                        {new Date(item?.createdAt).toLocaleDateString()} {new Date(item?.createdAt).toLocaleTimeString()}
+                                                    </td>
+                                                    <td>{item.id}</td>
+                                                    <td >
+                                                        <button onClick={() => {
+                                                            setId(item.id)
+                                                            setDetailsOpen(!detailsOpen)
+                                                        }}>
+                                                            <img src={Ic} alt="" />
+                                                        </button>
+                                                        <ul id={item.id} style={{ display: detailsOpen && id == item.id ? 'flex' : 'none' }}>
+                                                            <li>
+                                                                <img src={ViewIcon} alt="" />
+                                                                <Link to={`/user-details/${item.id}`}>
+                                                                    View Details
+                                                                </Link>
+                                                            </li>
+                                                            <li>
+                                                                <img src={Blacklist} alt="" />
+                                                                Blacklist User
+                                                            </li>
+                                                            <li>
+                                                                <img src={Activate} alt="" />
+                                                                Activate User
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
                                             ))
                                         }
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    {
-                                        paginatedData && paginatedData.map((item: any, i) => (
-                                            <tr key={i}>
-                                                <td>{item.orgName}</td>
-                                                <td>{item.userName}</td>
-                                                <td>{item.email}</td>
-                                                <td>{item.profile.phoneNumber}</td>
-                                                <td>
-                                                    {new Date(item?.createdAt).toLocaleDateString()} {new Date(item?.createdAt).toLocaleTimeString()}
-                                                </td>
-                                                <td>{item.id}</td>
-                                                <td >
-                                                    <button onClick={() => {
-                                                        setId(item.id)
-                                                        setDetailsOpen(!detailsOpen)
-                                                    }}>
-                                                        <img src={Ic} alt="" />
-                                                    </button>
-                                                    <ul id={item.id} style={{ display: detailsOpen && id == item.id ? 'flex' : 'none' }}>
-                                                        <li>
-                                                            <img src={ViewIcon} alt="" />
-                                                            <Link to={`/user-details/${item.id}`}>
-                                                                View Details
-                                                            </Link>
-                                                        </li>
-                                                        <li>
-                                                            <img src={Blacklist} alt="" />
-                                                            Blacklist User
-                                                        </li>
-                                                        <li>
-                                                            <img src={Activate} alt="" />
-                                                            Activate User
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
+                                    </tbody>
 
 
-                            </table>
+                                </table>
+                            </div>
 
                             <div className="table__footer">
                                 <div>

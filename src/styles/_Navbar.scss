@@ -29,6 +29,10 @@
             margin: 0;
         }
 
+        @include respond(tab-port) {
+            display: none;
+        }
+
         input {
             padding: .6rem 1rem;
             width: 50ch;
@@ -37,6 +41,7 @@
 
             @include respond(tab-port) {
                 width: auto;
+                display: none;
             }
         }
 
