@@ -71,7 +71,7 @@ const ProfileDetails = ({ profile, education, socials, guarantor, email }: any) 
                         </div>
                         <div>
                             <h4>Loan Repayment</h4>
-                            <p>{education.loanRepayment}</p>
+                            <p>N{education.loanRepayment}</p>
                         </div>
 
                     </div>

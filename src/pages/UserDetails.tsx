@@ -19,12 +19,17 @@ const UserDetails = () => {
             .then(data => {
                 console.log(data);
                 setData(data)
+                localStorage.setItem('dataKey', JSON.stringify(data));
             })
             .catch(err => console.log(err))
     }
 
     useEffect(() => {
-        fetchUsers()
+        if (localStorage.getItem('dataKey')) {
+            setData(JSON.parse(localStorage.getItem('dataKey') as string));
+        } else {
+            fetchUsers()
+        }
     }, [])
 
 
