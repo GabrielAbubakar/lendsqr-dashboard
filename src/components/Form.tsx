@@ -3,13 +3,15 @@ import '../styles/_Form.scss'
 interface FormArgs {
     filterOpen: boolean,
     form: any,
-    setForm: any
+    setForm: any,
+    filter: any
 }
 
-const Form = ({ filterOpen, form, setForm }: FormArgs) => {
+const Form = ({ filterOpen, form, setForm, filter }: FormArgs) => {
     return (
         <form className="table__filter"
             style={{ display: filterOpen ? 'block' : 'none' }}
+            onSubmit={filter}
         >
             <div className="table__filter-inputGroup">
                 <label htmlFor="org">
@@ -75,7 +77,7 @@ const Form = ({ filterOpen, form, setForm }: FormArgs) => {
             </div>
             <div className="table__filter-btn">
                 <button>Reset</button>
-                <button>Filter</button>
+                <button >Filter</button>
             </div>
         </form>
     )

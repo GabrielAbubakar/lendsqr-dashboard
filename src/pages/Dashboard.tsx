@@ -19,20 +19,36 @@ import PrevIcon from '../assets/icons/prev-btn-icon.svg';
 import FilterIcon from '../assets/icons/filter-results-icon.svg';
 import { User } from "../components/types";
 
+
+interface FilterArgs {
+    data: User[],
+    filterObj: FilterData
+}
+
+interface FilterData {
+    org: string,
+    username: string,
+    email: string,
+    date: string,
+    number: string,
+    status: string
+}
+
 const Dashboard = () => {
 
     const [filterOpen, setFilterOpen] = useState<boolean>(false)
     const [data, setData] = useState<User[]>()
     const [filteredData, setFilteredData] = useState<User[]>()
     const [paginatedData, setPaginatedData] = useState<User[]>()
-    const [page, setPage] = useState<number>(1)
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const [totalPages, setTotalPages] = useState<number>()
     const [rows, setRows] = useState<number>(10)
-    const [pages, setPages] = useState<number>()
-    const [pagesArr, setPagesArr] = useState()
+    const [detailsOpen, setDetailsOpen] = useState<boolean>(false)
+    const [id, setId] = useState<number>()
 
     const columns = ['Organization', 'Username', 'Email', 'Phone Number', 'Date Joined', 'Status']
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<FilterData>({
         org: '',
         username: '',
         email: '',
@@ -40,15 +56,6 @@ const Dashboard = () => {
         number: '',
         status: ''
     })
-
-
-    const pagination = (data: User[], rows: number, page: number) => {
-        const start = (page - 1) * rows;
-        const end = start + rows
-
-        setPaginatedData(data.slice(start, end))
-        setPages(Math.ceil(data.length / rows))
-    }
 
     const fetchUsers = () => {
         fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users')
@@ -60,15 +67,32 @@ const Dashboard = () => {
             .catch(err => console.log(err))
     }
 
+    const filterData = ({ data, filterObj }: FilterArgs) => {
+        // for (let i = 0; i < data.length; i++) {
+
+        // }
+        setFilteredData(data.filter(user => {
+            user.userName == filterObj.username
+        }))
+    }
+
+    const pagination = (data: User[], rows: number, currentPage: number) => {
+        const start = (currentPage - 1) * rows;
+        const end = start + rows
+
+        setPaginatedData(data.slice(start, end))
+        setTotalPages(Math.ceil(data.length / rows))
+    }
+
     useEffect(() => {
         fetchUsers()
     }, [])
 
     useEffect(() => {
         if (data) {
-            pagination(data, rows, page)
+            pagination(data, rows, currentPage)
         }
-    }, [data, rows, page])
+    }, [data, rows, currentPage])
 
 
     return (
@@ -89,7 +113,11 @@ const Dashboard = () => {
                     <div className="dashboard__table-container">
                         <div className="dashboard__table">
 
-                            <Form filterOpen={filterOpen} form={form} setForm={setForm} />
+                            <Form
+                                filter={filterData}
+                                filterOpen={filterOpen}
+                                form={form}
+                                setForm={setForm} />
 
                             <table cellSpacing={0}>
 
@@ -119,11 +147,14 @@ const Dashboard = () => {
                                                     {new Date(item?.createdAt).toLocaleDateString()} {new Date(item?.createdAt).toLocaleTimeString()}
                                                 </td>
                                                 <td>{item.id}</td>
-                                                <td>
-                                                    <button>
+                                                <td >
+                                                    <button onClick={() => {
+                                                        setId(item.id)
+                                                        setDetailsOpen(!detailsOpen)
+                                                    }}>
                                                         <img src={Ic} alt="" />
                                                     </button>
-                                                    <ul>
+                                                    <ul id={item.id} style={{ display: detailsOpen && id == item.id ? 'flex' : 'none' }}>
                                                         <li>
                                                             <img src={ViewIcon} alt="" />
                                                             <Link to={`/user-details/${item.id}`}>
@@ -159,15 +190,23 @@ const Dashboard = () => {
                                     </p>
                                 </div>
                                 <div className="pagination">
-                                    <span>
+                                    <span onClick={() => {
+                                        if (currentPage !== 0) {
+                                            setCurrentPage(currentPage - 1)
+                                        }
+                                    }}>
                                         <img src={PrevIcon} alt="" />
                                     </span>
                                     <ul>
-                                        {
 
-                                        }
                                     </ul>
-                                    <span>
+                                    <span onClick={() => {
+                                        if (totalPages) {
+                                            if (currentPage < totalPages) {
+                                                setCurrentPage(currentPage + 1)
+                                            }
+                                        }
+                                    }}>
                                         <img src={NextIcon} alt="" />
                                     </span>
                                 </div>
