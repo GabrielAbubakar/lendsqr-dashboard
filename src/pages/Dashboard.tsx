@@ -42,6 +42,7 @@ const Dashboard = () => {
     const [paginatedData, setPaginatedData] = useState<User[]>()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [totalPages, setTotalPages] = useState<number>()
+    const [pagesArr, setPagesArr] = useState<number[]>()
     const [rows, setRows] = useState<number>(10)
     const [detailsOpen, setDetailsOpen] = useState<boolean>(false)
     const [id, setId] = useState<number>()
@@ -61,16 +62,13 @@ const Dashboard = () => {
         fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setData(data)
             })
             .catch(err => console.log(err))
     }
 
     const filterData = ({ data, filterObj }: FilterArgs) => {
-        // for (let i = 0; i < data.length; i++) {
-
-        // }
         setFilteredData(data.filter(user => {
             user.userName == filterObj.username
         }))
@@ -93,6 +91,16 @@ const Dashboard = () => {
             pagination(data, rows, currentPage)
         }
     }, [data, rows, currentPage])
+
+    useEffect(() => {
+        if (totalPages) {
+            const arr = []
+            for (let i = 1; i <= totalPages; i++) {
+                arr.push(i)
+            }
+            setPagesArr(arr)
+        }
+    }, [totalPages])
 
 
     return (
@@ -182,7 +190,10 @@ const Dashboard = () => {
                             <div className="table__footer">
                                 <div>
                                     <p>
-                                        Showing <select name="rows" id="rows" onChange={(e) => setRows(+e.target.value)}>
+                                        Showing <select name="rows" id="rows" onChange={(e) => {
+                                            setCurrentPage(1)
+                                            setRows(+e.target.value)
+                                        }}>
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="50">50</option>
@@ -191,23 +202,27 @@ const Dashboard = () => {
                                 </div>
                                 <div className="pagination">
                                     <span onClick={() => {
-                                        if (currentPage !== 0) {
-                                            setCurrentPage(currentPage - 1)
-                                        }
+                                        currentPage !== 0 && setCurrentPage(currentPage - 1)
                                     }}>
-                                        <img src={PrevIcon} alt="" />
+                                        <img src={PrevIcon} alt="prev icon" />
                                     </span>
                                     <ul>
-
+                                        {
+                                            pagesArr?.map(i => (
+                                                <li
+                                                    key={i}
+                                                    onClick={() => setCurrentPage(i)}
+                                                    style={{ color: currentPage == i ? '#545F7D' : '#545f7d99' }}>
+                                                    {i}
+                                                </li>
+                                            ))
+                                        }
                                     </ul>
                                     <span onClick={() => {
-                                        if (totalPages) {
-                                            if (currentPage < totalPages) {
-                                                setCurrentPage(currentPage + 1)
-                                            }
-                                        }
-                                    }}>
-                                        <img src={NextIcon} alt="" />
+                                        totalPages && currentPage < totalPages && setCurrentPage(currentPage + 1)
+                                    }
+                                    }>
+                                        <img src={NextIcon} alt="next icon" />
                                     </span>
                                 </div>
                             </div>
