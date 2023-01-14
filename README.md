@@ -1,5 +1,5 @@
 # Lendsqr Dashboard
-
+ 
 ## Overview
 - This is the submission for the Lendsqr Frontend Engineer Assessment.
 - The task was the development of a multipage web app that fetched users from an api to generate pages to be used to populate a dashboard page as well as a user details page.
