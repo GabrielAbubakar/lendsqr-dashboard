@@ -83,10 +83,6 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        fetchUsers()
-    }, [])
-
-    useEffect(() => {
         if (data) {
             pagination(data, rows, currentPage)
         }
@@ -101,6 +97,10 @@ const Dashboard = () => {
             setPagesArr(arr)
         }
     }, [totalPages])
+
+    useEffect(() => {
+        fetchUsers()
+    }, [])
 
 
     return (
