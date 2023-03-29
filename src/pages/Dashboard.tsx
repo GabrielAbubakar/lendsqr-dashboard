@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { Await, Link } from 'react-router-dom'
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import StatCard from "../components/StatCard";
@@ -13,6 +13,8 @@ import Ic from '../assets/icons/ic-more-icon.svg';
 import Blacklist from '../assets/icons/blacklist-icon.svg';
 import Activate from '../assets/icons/activate-icon.svg';
 import ViewIcon from '../assets/icons/view-more-icon.svg';
+
+import Loading from '../assets/loading-bar.svg';
 
 import NextIcon from '../assets/icons/next-btn-icon.svg';
 import PrevIcon from '../assets/icons/prev-btn-icon.svg';
@@ -47,6 +49,8 @@ const Dashboard = () => {
     const [detailsOpen, setDetailsOpen] = useState<boolean>(false)
     const [id, setId] = useState<number>()
 
+    const [isLoading, setIsLoading] = useState<boolean>()
+
     const columns = ['Organization', 'Username', 'Email', 'Phone Number', 'Date Joined', 'Status']
 
     const [form, setForm] = useState<FilterData>({
@@ -58,14 +62,17 @@ const Dashboard = () => {
         status: ''
     })
 
-    const fetchUsers = () => {
-        fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users')
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                setData(data)
-            })
-            .catch(err => console.log(err))
+    const fetchUsers = async () => {
+        setIsLoading(true)
+        try {
+            const res = await fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users');
+            const data = await res.json()
+            setData(data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     const filterData = ({ data, filterObj }: FilterArgs) => {
@@ -102,6 +109,10 @@ const Dashboard = () => {
         fetchUsers()
     }, [])
 
+    useEffect(() => {
+        console.log(isLoading);
+    }, [isLoading])
+
 
     return (
         <div className="dashboard">
@@ -117,6 +128,10 @@ const Dashboard = () => {
                         <StatCard img={LoansIcon} title='Users with Loans' stat={12453} />
                         <StatCard img={SavingsIcon} title='Users with Savings' stat={102453} />
                     </div>
+
+                    {/* <div>
+                        <img src={Loading} alt="loading" />
+                    </div> */}
 
                     <div className="dashboard__table-container">
                         <div className="dashboard__table">
